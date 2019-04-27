@@ -11,7 +11,9 @@
 #include <unordered_set>
 
 
+
 #define GRPPRINT // 用于提示每个步骤的进行状况
+#define GRPDEBUG
 
 using std::cout;
 using std::cin;

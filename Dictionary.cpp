@@ -19,13 +19,31 @@ Dictionary::Dictionary(string dic_name)
 	for (const auto &word : dic_file.vectorstring)
 	{
 		hash_dic.insert(word);
+		word_max_len = max(word_max_len, (int)word.length());
 	}
 
 	dic_size = hash_dic.size();
 	// cout << (hash_dic.find("高若朋") != hash_dic.end())<< endl;
 	// 通过上面注释掉的语句测试了生成的hash可以使用
 #ifdef GRPPRINT
-	cout << "[词典 " << name << " 创建成功，共计 "<< dic_size << " 词条]" << endl;
+	cout << "[词典 " << name << " 创建成功，共计 "<< dic_size << " 词条，最长词长为 "<< word_max_len << "]" << endl;
 #endif
 	return;
 }
+
+Dictionary::~Dictionary()
+{
+	
+}
+
+bool Dictionary::find(string word) const
+{
+	return hash_dic.find(word) != hash_dic.end();
+}
+
+
+int Dictionary::get_word_max() const
+{
+	return word_max_len;
+}
+

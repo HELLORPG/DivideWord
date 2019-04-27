@@ -14,12 +14,15 @@ private:
 	// hash<string> hash_dic;
 	std::unordered_set<string> hash_dic;
 
-	int max_len; // 词典中最长的词长
+	int word_max_len; // 词典中最长的词长
 	int dic_size;
 	
 public:
 	// Dictionary(vector<string> read_data);
-	Dictionary() : max_len(0) {}
+	Dictionary() : word_max_len(0) {}
 	Dictionary(string dic_name);
+	~Dictionary();
 
+	bool find(string word) const;
+	int get_word_max() const;
 };

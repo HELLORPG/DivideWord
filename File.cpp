@@ -28,6 +28,34 @@ void File::readfile_to_vectorstring()
 	return;
 }
 
+void File::readfile_to_vectorchar()
+{
+#ifdef GRPPRINT
+	cout << "[从文件 " << name << " 中读取数据，存入vector<char>]" << endl;
+#endif
+	char read_data;
+
+	do
+	{
+		file >> read_data;
+		vectorchar.push_back(read_data);
+	} while (!file.eof());
+
+	return;
+}
+
+void File::writefile_vectorstring()
+{
+#ifdef GRPPRINT
+	cout << "[从vector<string>写入文件 " << name << " ]" << endl;
+#endif
+	for (const auto &word : vectorstring)
+		file << word << " ";
+
+	return;
+}
+
+
 void File::print_vectorstring()
 {
 	cout << "<DEBUG> [PRINT vector<string>]" << endl;
@@ -36,3 +64,21 @@ void File::print_vectorstring()
 
 	return;
 }
+
+void File::print_vectorchar()
+{
+	cout << "<DEBUG> [PRINT vector<char>]" << endl;
+	for (const auto &x : vectorchar)
+		cout << x ;
+	cout << endl;
+
+	return;
+}
+
+File::~File()
+{
+	file.close();
+}
+
+
+
