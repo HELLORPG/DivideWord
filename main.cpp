@@ -2,8 +2,7 @@
 #include "File.h"
 #include "Dictionary.h"
 #include "Article.h"
-
-
+#include "ArticleSet.h"
 
 
 int main()
@@ -14,9 +13,13 @@ int main()
 	test_file.print_vectorstring();*/
 
 	Dictionary test_dic("´Êµä.txt");
-	Article test_art("2002020500435.txt");
-	test_art.Divide(test_dic);
-	test_art.print_divide();
+	/*Article test_art("2002020500435.txt");
+	test_art.divide(test_dic);
+	test_art.print_divide();*/
+	ArticleSet test_set;
+	test_set.insert_article("2002020500435.txt");
+	test_set.insert_article("2002020500437.txt");
+	test_set.divide_all_article(test_dic);
 
 	return 0;
 }

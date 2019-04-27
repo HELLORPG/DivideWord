@@ -36,7 +36,7 @@ Article::~Article()
 	
 }
 
-void Article::Divide(const Dictionary& dic)
+void Article::divide(const Dictionary& dic)
 {
 	divide_file.open_file(dividefile_name, std::ios::out);
 
@@ -78,17 +78,42 @@ void Article::Divide(const Dictionary& dic)
 
 			else if (m == 1)
 			{
+				bool flag(false);
 				// cout << "?" << endl;
 				word.clear();
-				word.push_back(data[i]);
+				for (; i < data.size(); ++i)
+				{
+					// word.push_back(data[i]);
+					if ((data[i] <= '9' && data[i] >= '0')
+						|| (data[i] >= 'a' && data[i] <= 'z')
+						|| (data[i] >= 'A' && data[i] <= 'Z'))
+					{
+						word.push_back(data[i]);
+						flag = true;
+					}
+					else
+					{
+						if (flag)
+							--i;
+						// cout << "?" << endl;
+						break;
+					}
+				}
+				if (!flag)
+					word.push_back(data[i]);
+
 				divide_result.push_back(word);
 				break;
 			}
 		}
 	}
 	/*
+	 * v1.0
 	 * 上面的分词算法最后只能得到所有在词典中的词语
 	 * 而根据对于正向匹配的分析可以得到，需要的是所有的词，如果词典中没有，就作为单字输出
+	 * 
+	 * v2.0
+	 * 更改了1.0中遇见的问题，同时将分词结果中的中英文合并成为一个词，有利于观感
 	 */
 
 
@@ -110,5 +135,19 @@ void Article::print_divide()
 
 	return;
 }
+
+Article::Article(const Article& art)
+{
+	art_file = art.art_file;
+	divide_file = art.divide_file;
+	artfile_name = art.artfile_name;
+	dividefile_name = art.dividefile_name;
+
+	data = art.data;
+	divide_result = art.divide_result;
+
+	art_len = art.art_len;
+}
+
 
 

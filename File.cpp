@@ -80,5 +80,23 @@ File::~File()
 	file.close();
 }
 
+File::File(const File& f)
+{
+	// file = f.file;
+	name = f.name;
+	vectorstring = f.vectorstring;
+	vectorchar = f.vectorchar;
+}
+
+File& File::operator=(const File& f)
+{
+	name = f.name;
+	vectorstring = f.vectorstring;
+	vectorchar = f.vectorchar;
+	return *this;
+}
+
+
+
 
 

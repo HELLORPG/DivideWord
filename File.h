@@ -12,6 +12,9 @@ private:
 	vector<char> vectorchar; // 这里拟采用char的方式存储文章
 public:
 	~File();
+	File() {}
+	File(const File &f);
+	File& operator=(const File &f);
 	bool open_file(string filename, std::ios::openmode mode); // 打开成功就返回true，反之亦然
 
 	void readfile_to_vectorstring(); // 将数据读入vector<string>中
