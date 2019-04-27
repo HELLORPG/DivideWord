@@ -61,15 +61,44 @@ void Article::Divide(const Dictionary& dic)
 				i += m - 1;
 				break;
 			}
+
+			// 据说中文的所有的字都是负值，所以可以根据这种方法来进行划分
+			if (m == 2)
+			{
+				if (data[i] < 0/* || (ispunct(data[i]) == 1 && ispunct(data[i + 1] == 1))*/)
+				{
+					word.clear();
+					word.push_back(data[i]);
+					word.push_back(data[i + 1]);// [i] + data[i + 1];
+					divide_result.push_back(word);
+					++i;
+					break;
+				}			
+			}
+
+			else if (m == 1)
+			{
+				// cout << "?" << endl;
+				word.clear();
+				word.push_back(data[i]);
+				divide_result.push_back(word);
+				break;
+			}
 		}
 	}
+	/*
+	 * 上面的分词算法最后只能得到所有在词典中的词语
+	 * 而根据对于正向匹配的分析可以得到，需要的是所有的词，如果词典中没有，就作为单字输出
+	 */
+
+
+
 
 	// 分词结束，下面需要写入文件
 	divide_file.vectorstring = divide_result; // 这里可以通过减少copy来达到增加时间效率的目的
 	divide_file.writefile_vectorstring();
 
 	return;
-
 }
 
 void Article::print_divide()

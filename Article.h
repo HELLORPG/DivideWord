@@ -15,6 +15,8 @@ private:
 
 	vector<char> data;
 	vector<string> divide_result;
+	// string divide_result;
+	// vector<string> other
 
 	int art_len;
 public:
